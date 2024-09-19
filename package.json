@@ -4,7 +4,8 @@
   "description": "Reprimand/punish users who use offensive language in GitHub issues comments",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "probot run ./index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/DanielOnGitHub17/git-patrol#readme",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "probot": "^13.3.8"
   }
 }
