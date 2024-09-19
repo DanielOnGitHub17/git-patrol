@@ -1,0 +1,22 @@
+{
+  "name": "git-patrol",
+  "version": "1.0.0",
+  "description": "Reprimand/punish users who use offensive language in GitHub issues comments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielOnGitHub17/git-patrol.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielOnGitHub17/git-patrol/issues"
+  },
+  "homepage": "https://github.com/DanielOnGitHub17/git-patrol#readme",
+  "dependencies": {
+    "probot": "^13.3.8"
+  }
+}
