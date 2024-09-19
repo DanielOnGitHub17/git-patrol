@@ -5,6 +5,13 @@ const path = require("path");
 // Load environment variables
 require("dotenv").config();
 
+events = ["issues.opened", "issues.edited"
+    , "issue_comment.created", "issue_comment.edited"
+    , "commit_comment.created"
+    , "discussion.created", "discussion.edited"
+    , "discussion_comment.created", "discussion_comment.edited"
+];
+
 module.exports = (app) => {
   // Load the private key from file
   const privateKey = fs.readFileSync(path.join(__dirname, process.env.PRIVATE_KEY_PATH), "utf8");
@@ -19,11 +26,13 @@ module.exports = (app) => {
     return appAuth.getInstallationOctokit(installationId);
   };
 
-  // Example: Respond to issues.opened event
-  app.on("issues.opened", async (context) => {
+  app.on(events, replyToIssue);
+};
+
+async function replyToIssue(context) {
     const issueComment = context.issue({
-      body: "Hi there!!! It's great that you want to talk about this."
+        body: "Hello!!! Nice comment there!"
     });
     return context.octokit.issues.createComment(issueComment);
-  });
-};
+}
+
