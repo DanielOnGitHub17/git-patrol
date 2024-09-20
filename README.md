@@ -1,4 +1,4 @@
-#Git-Patrolhks users comments
+#Git-Patrol uses sentiment analysis to reprimand user's comments
 
 
 
