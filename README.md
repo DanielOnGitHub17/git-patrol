@@ -1,2 +1,2 @@
 # git-patrol
-git-patrol Flask API
+git-patrol Probot GitHub Bot
