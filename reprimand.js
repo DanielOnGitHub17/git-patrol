@@ -58,7 +58,7 @@ function makeRandomResponse(sender, message){
     for (let i=0; i < quoteMessage.length; i++){
         quoteMessage[i] = "> "+quoteMessage[i];
     };
-    const badCount = parseInt(2 * Math.random()) + 1;
+    const badCount = parseInt(2 * Math.random()) + 2;
     const rebuke = getRandomOffensiveResponse();
     const rebukeMessage = quoteMessage.join('\n')+
         `\n\n@${sender}\n` +
