@@ -1,5 +1,4 @@
-# watson-wear
-Application that suggests what to wear based on weather.
+#Git-Patrol uses sentiment analysis to reprimand user's comments
 
 
 
