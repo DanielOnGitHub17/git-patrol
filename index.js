@@ -3,8 +3,7 @@
 const { Probot } = require("probot");
 const fs = require("fs");
 const path = require("path");
-
-// Load environment variables
+const sentimentApp = require("./repremand");
 require("dotenv").config();
 
 events = ["issues.opened", "issues.edited"
@@ -35,18 +34,24 @@ module.exports = (app) => {
       privateKey: privateKey
     });
     return appAuth.getInstallationOctokit(installationId);
+
   };
 
   app.on(events, replyToIssue);
+
+  sentimentApp();
 };
 
 async function replyToIssue(context) {
   const response = getRandomOffensiveResponse();
 
-  const issueComment = context.issue({
-      body: response
+  if (sentimentResult.text === "Negative sentiment detected") {
+    const response = getRandomOffensiveResponse();
+    const issueComment = context.issue({
+        body: response
     });
     return context.octokit.issues.createComment(issueComment);
+  }
 }
 
 // https://prod.liveshare.vsengsaas.visualstudio.com/join?991B970CD816922B96012DD15BE9D6996208
