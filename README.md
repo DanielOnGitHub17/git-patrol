@@ -89,8 +89,8 @@ git push origin feature/your-feature-name
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Developers
-Abraham Ochelle 
+Abraham Ochelle (https://github.com/Ochelle-Abraham)
 
-Daniel Enesi- (https://github.com/DanielOnGitHub17/)
+Daniel Enesi (https://github.com/DanielOnGitHub17/)
 
-Joseph Oduyebo https://github.com/jayco12/
+Joseph Oduyebo (https://github.com/jayco12/)
