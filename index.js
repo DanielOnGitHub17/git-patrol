@@ -1,27 +1,18 @@
-
-
 const { Probot } = require("probot");
 const fs = require("fs");
 const path = require("path");
-const sentimentApp = require("./repremand");
-require("dotenv").config();
+const reprimand = require("./reprimand.js");
 
-events = ["issues.opened", "issues.edited"
-    , "issue_comment.created", "issue_comment.edited"
-    , "commit_comment.created"
-    , "discussion.created", "discussion.edited"
-    , "discussion_comment.created", "discussion_comment.edited"
+const [isNegativeSentiment, makeRandomResponse] =
+    [reprimand.isNegativeSentiment, reprimand.makeRandomResponse];
+
+const events = ["issues.opened", "issues.edited"
+  , "issue_comment.created", "issue_comment.edited"
+  , "commit_comment.created"
+  , "discussion.created", "discussion.edited"
+  , "discussion_comment.created", "discussion_comment.edited"
 ];
-offensive_responses = [
-  "Please be respectful in your comments.",
-  "This comment violates our community guidelines.",
-  "Let's keep the conversation constructive.",
-  "Offensive language is not tolerated here.",
-  "Please refrain from using inappropriate language."
-]
-function getRandomOffensiveResponse() {
-  return offensiveResponses[Math.floor(Math.random() * offensiveResponses.length)];
-}
+
 module.exports = (app) => {
   // Load the private key from file
   const privateKey = fs.readFileSync(path.join(__dirname, process.env.PRIVATE_KEY_PATH), "utf8");
@@ -38,21 +29,23 @@ module.exports = (app) => {
   };
 
   app.on(events, replyToIssue);
-
-  sentimentApp();
 };
 
 async function replyToIssue(context) {
-  const response = getRandomOffensiveResponse();
+  if (context.isBot) return;  // Don't want recursive - effect
+  const sentBy = context.payload.sender.login;
 
-  if (sentimentResult.text === "Negative sentiment detected") {
-    const response = getRandomOffensiveResponse();
-    const issueComment = context.issue({
-        body: response
-    });
-    return context.octokit.issues.createComment(issueComment);
+  let messageLocation = "issue";
+  if (context.name.includes("comment")){
+    messageLocation = "comment";
   }
+  const message = context.payload[messageLocation].body;
+
+  const rebukeMessage = makeRandomResponse(sentBy, message);
+  if (!isNegativeSentiment(message)) return;
+  const issueComment = context.issue({
+    body: rebukeMessage
+  });
+
+  return context.octokit.issues.createComment(issueComment);
 }
-
-// https://prod.liveshare.vsengsaas.visualstudio.com/join?991B970CD816922B96012DD15BE9D6996208
-
