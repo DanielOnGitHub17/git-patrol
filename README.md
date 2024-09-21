@@ -37,9 +37,10 @@ Git Patrol Bot is a Probot application designed to monitor GitHub repositories f
 
 2. Install the Dependencies:
    
+    ```bash
    npm install
 
-3. Set up your environment variables. Create a .env file in the root of the project and add your GitHub App credentials:
+4. Set up your environment variables. Create a .env file in the root of the project and add your GitHub App credentials:
    APP_ID=your_app_id
    PRIVATE_KEY_PATH=path_to_your_private_key.pem
 
@@ -51,10 +52,12 @@ Responses: Change the responses in the offensiveResponses array within the app.j
 ## Usage
 
 1. Start the bot:
+    ```bash
    npm start
-2. Deploy the bot on your GitHub repository. Follow the instructions from the Probot documentation to deploy your bot.
+    
+3. Deploy the bot on your GitHub repository. Follow the instructions from the Probot documentation to deploy your bot.
 
-3. The bot will automatically start monitoring for issues and comments in the connected repository.
+4. The bot will automatically start monitoring for issues and comments in the connected repository.
 
 ## Contributing
 Contributions are welcome! If you have suggestions or improvements, please create a pull request or open an issue.
@@ -63,14 +66,14 @@ Contributions are welcome! If you have suggestions or improvements, please creat
 1. Fork the repository.
 
 2. Create a new branch:
-
-git checkout -b feature/your-feature-name
+   
+git checkout -b feature/your-feature-name/
 
 3. Make your changes and commit them:
-
+   
 git commit -m "Add your message"
 
-4. Push to the branch:
+5. Push to the branch:
 
 git push origin feature/your-feature-name
 
@@ -81,5 +84,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Developers
 Abraham Ochelle 
-Daniel Enesi
-Joseph Oduyebo
+
+Daniel Enesi- (https://github.com/DanielOnGitHub17/)
+
+Joseph Oduyebo https://github.com/jayco12/
