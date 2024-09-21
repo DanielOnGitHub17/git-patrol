@@ -12,12 +12,18 @@ Git Patrol Bot is a Probot application designed to monitor GitHub repositories f
 - [Contributing](#contributing)
 - [License](#license)
 
+
+## Try it out:
+
+https://github.com/apps/git-patrol
+
 ## Features
 
 - **Sentiment Analysis**: Automatically analyzes the sentiment of issues and comments to identify negative language.
 - **Constructive Responses**: Responds with a set of predefined messages to encourage respectful discussion.
 - **Modular Design**: Easily customizable and extendable with modular components.
 - **JSON Configuration**: Utilizes a JSON file for maintaining a comprehensive list of negative words.
+- 
 
 ## Technologies Used
 
