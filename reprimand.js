@@ -1,9 +1,9 @@
 const negativeWords = ["awful", "bad", "terrible", "horrible", "worst", "nasty", 
     "unpleasant", "dreadful", "atrocious", "disappointing", 
-    "unacceptable", "ineffective", "miserable", "painful", 
+    "unacceptable", "ineffective", "miserable", 
     "regretful", "annoying", "irritating", "frustrating", 
     "distressing", "unhelpful", "depressing", "negative", 
-    "fearful", "pessimistic", "angry", "sad", "lonely", 
+    "fearful", "pessimistic", "angry", "rubbish", "lonely", 
     "confused", "chaotic", "weak", "defeated", "lost", 
     "insufficient", "inadequate", "unhealthy", "broken", 
     "flawed", "ugly", "empty", "harsh", "cruel", 
@@ -12,7 +12,7 @@ const negativeWords = ["awful", "bad", "terrible", "horrible", "worst", "nasty",
     "greedy", "dishonest", "guilty", "blameworthy", 
     "careless", "reckless", "critical", "scornful", 
     "spiteful", "malicious", "deceitful", "untrustworthy", 
-    "invalid", "limited", "failed", "flawed", "unsatisfactory", 
+    "invalid", "limited", "failed", "flawed", "nonsense", 
     "subpar", "declining", "stressed", "troublesome", 
     "burdensome", "treacherous", "disastrous", "unproductive", 
     "fruitless", "regrettable", "miserable", "unsatisfactory"
@@ -24,18 +24,23 @@ const reprimands = [
     "Offensive language is not tolerated here. Please adhere to our community guidelines.",
     "Your comment violates our code of conduct. Kindly edit or remove it.",
     "Let's keep the conversation professional and focused on the issue at hand.",
-    "Personal attacks are unacceptable. Please keep your feedback respectful and relevant.",
+    "Please keep your feedback respectful and relevant.",
     "This kind of language is not conducive to a productive discussion. Please refrain from using it.",
     "We value constructive feedback, but your comment crosses the line. Please be respectful.",
     "Your comment is not in line with our community standards. Please modify it.",
     "Please remember to be courteous and considerate in your comments."
-  ];
+];
   
+const punctuations = ['.', ',', '!', '-'];
 
-async function isNegativeSentiment(issue) {
-    text = new Set(issue.split(' '));
+function isNegativeSentiment(issue) {
+    issue = issue.toLowerCase();
+    punctuations.forEach(p=>{
+        issue = issue.replaceAll(p, "");
+    });
+    const text = new Set(issue.split(' '));
     for (const word of negativeWords){
-        if (word in text){
+        if (text.has(word)){
             return true;
         };
     };
@@ -43,7 +48,28 @@ async function isNegativeSentiment(issue) {
     return false;
 }
 
-async function reprimand() {
-    const index = parseInt(reprimands.length*Math.random());
-    return reprimands[index];
+
+function getRandomOffensiveResponse() {
+    return reprimands[Math.floor(Math.random() * reprimands.length)];
 }
+
+function makeRandomResponse(sender, message){
+    let quoteMessage = message.split('\n');
+    for (let i=0; i < quoteMessage.length; i++){
+        quoteMessage[i] = "> "+quoteMessage[i];
+    };
+    const badCount = parseInt(2 * Math.random()) + 1;
+    const rebuke = getRandomOffensiveResponse();
+    const rebukeMessage = quoteMessage.join('\n')+
+        `\n\n@${sender}\n` +
+        rebuke +
+        `\nYou have now made negative comments ${badCount} times. ` +
+        "If you repeat this behaviour, disciplinary action would be taken";
+    return rebukeMessage;
+
+}
+
+module.exports = {
+    isNegativeSentiment,
+    makeRandomResponse
+};
