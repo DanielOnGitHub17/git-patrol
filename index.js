@@ -1,3 +1,5 @@
+
+
 const { Probot } = require("probot");
 const fs = require("fs");
 const path = require("path");
@@ -11,7 +13,16 @@ events = ["issues.opened", "issues.edited"
     , "discussion.created", "discussion.edited"
     , "discussion_comment.created", "discussion_comment.edited"
 ];
-
+offensive_responses = [
+  "Please be respectful in your comments.",
+  "This comment violates our community guidelines.",
+  "Let's keep the conversation constructive.",
+  "Offensive language is not tolerated here.",
+  "Please refrain from using inappropriate language."
+]
+function getRandomOffensiveResponse() {
+  return offensiveResponses[Math.floor(Math.random() * offensiveResponses.length)];
+}
 module.exports = (app) => {
   // Load the private key from file
   const privateKey = fs.readFileSync(path.join(__dirname, process.env.PRIVATE_KEY_PATH), "utf8");
@@ -30,8 +41,10 @@ module.exports = (app) => {
 };
 
 async function replyToIssue(context) {
-    const issueComment = context.issue({
-        body: "Hello!!! Nice comment there!"
+  const response = getRandomOffensiveResponse();
+
+  const issueComment = context.issue({
+      body: response
     });
     return context.octokit.issues.createComment(issueComment);
 }
