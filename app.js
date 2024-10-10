@@ -33,17 +33,5 @@ async function replyToIssue(context) {
 console.log("GOT TO THE APP");
 
 module.exports = (app) => {
-  // Set up authentication
-  app.auth = (installationId) => {
-    const { App } = require("@octokit/app");
-    const appAuth = new App({
-      appId: process.env.APP_ID,
-      privateKey: process.env.PRIVATE_KEY,
-      secret: process.env.WEBHOOK_SECRET
-    });
-    return appAuth.getInstallationOctokit(installationId);
-
-  };
-
   app.on(events, replyToIssue);
 };
