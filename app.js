@@ -37,7 +37,8 @@ module.exports = (app) => {
     const { App } = require("@octokit/app");
     const appAuth = new App({
       appId: process.env.APP_ID,
-      privateKey: process.env.PRIVATE_KEY
+      privateKey: process.env.PRIVATE_KEY,
+      secret: process.env.WEBHOOK_SECRET
     });
     return appAuth.getInstallationOctokit(installationId);
 
