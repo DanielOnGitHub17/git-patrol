@@ -1,18 +1,17 @@
-const { createNodeMiddleware, createProbot } = require('probot');
+// // api/github/webhooks/index.js
+// import { createNodeMiddleware, createProbot } from "probot";
 
-// Initialize the Probot app
-const app = require('../../../app'); // Assuming you have your Probot logic in a file called app.js
+// import app from "../../../app.js";
+// console.log("hi");
 
-// console.log("hi")
+// export default createNodeMiddleware(app, {
+//   probot: createProbot(),
+//   webhooksPath: "/api/github/webhooks",
+// });
 
-// Export a function for Vercel to handle requests
-module.exports = (req, res) => {
-  const probot = createProbot({
-    appId: process.env.APP_ID,
-    privateKey: process.env.PRIVATE_KEY,
-    secret: process.env.WEBHOOK_SECRET,
-  });
-  
-  const middleware = createNodeMiddleware(app, { probot });
-  middleware(req, res);
-};
+const { createNodeMiddleware, createProbot } = require("probot");
+
+const app = require("../../../app");
+const probot = createProbot();
+
+module.exports = createNodeMiddleware(app, { probot, webhooksPath: '/api/github/webhooks' });
