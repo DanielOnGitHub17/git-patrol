@@ -1,4 +1,4 @@
-const { createNodeMiddleware, Probot } = require("probot");
+const { Probot } = require("probot");
 const fs = require("fs");
 const path = require("path");
 const reprimand = require("./reprimand.js");
