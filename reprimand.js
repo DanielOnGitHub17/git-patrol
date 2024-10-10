@@ -31,12 +31,12 @@ const reprimands = [
     "Please remember to be courteous and considerate in your comments."
 ];
   
-const punctuations = ['.', ',', '!', '-'];
+const punctuations = ['.', ',', '!', '-', '?', '\n'];
 
 function isNegativeSentiment(issue) {
     issue = issue.toLowerCase();
     punctuations.forEach(p=>{
-        issue = issue.replaceAll(p, "");
+        issue = issue.replaceAll(p, ' ');
     });
     const text = new Set(issue.split(' '));
     for (const word of negativeWords){
