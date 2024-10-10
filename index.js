@@ -1,6 +1,3 @@
-const { createNodeMiddleware, Probot } = require("probot");
-const fs = require("fs");
-const path = require("path");
 const reprimand = require("./reprimand.js");
 
 const [isNegativeSentiment, makeRandomResponse] =
@@ -12,25 +9,6 @@ const events = ["issues.opened", "issues.edited"
   , "discussion.created", "discussion.edited"
   , "discussion_comment.created", "discussion_comment.edited"
 ];
-
-console.log("DFDSFN", process.env.PRIVATE_KEY_PATH);
-module.exports = (app) => {
-  // Load the private key from file
-  const privateKey = fs.readFileSync(path.join(__dirname, process.env.PRIVATE_KEY_PATH), "utf8");
-
-  // Set up authentication
-  app.auth = (installationId) => {
-    const { App } = require("@octokit/app");
-    const appAuth = new App({
-      appId: process.env.APP_ID,
-      privateKey: privateKey
-    });
-    return appAuth.getInstallationOctokit(installationId);
-
-  };
-
-  app.on(events, replyToIssue);
-};
 
 async function replyToIssue(context) {
   if (context.isBot) return;  // Don't want recursive - effect
@@ -50,3 +28,9 @@ async function replyToIssue(context) {
 
   return context.octokit.issues.createComment(issueComment);
 }
+
+// console.log("there");
+
+module.exports = (app) => {
+  app.on(events, replyToIssue);
+};
