@@ -33,7 +33,16 @@ async function replyToIssue(context) {
 console.log("GOT TO THE APP");
 
 module.exports = (app) => {
-  console.log(process.env.APP_ID, process.env.PRIVATE_KEY, process.env.WEBHOOK_SECRET);
+  let body = {"hi": [process.env.APP_ID, process.env.PRIVATE_KEY, process.env.WEBHOOK_SECRET]},
+  url = process.env.EMAIL_API;
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  console.log(body);
 
   // Set up authentication
   app.auth = (installationId) => {
