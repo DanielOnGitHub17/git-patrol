@@ -11,6 +11,7 @@ const events = ["issues.opened", "issues.edited"
 ];
 
 async function replyToIssue(context) {
+  console.log("Will soon reply to issue");
   if (context.isBot) return;  // Don't want recursive - effect
   const sentBy = context.payload.sender.login;
 
@@ -29,9 +30,11 @@ async function replyToIssue(context) {
   return context.octokit.issues.createComment(issueComment);
 }
 
-// console.log("there");
+console.log("GOT TO THE APP");
 
 module.exports = (app) => {
+  console.log(process.env.APP_ID, process.env.PRIVATE_KEY, process.env.WEBHOOK_SECRET);
+
   // Set up authentication
   app.auth = (installationId) => {
     const { App } = require("@octokit/app");
