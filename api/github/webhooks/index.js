@@ -1,8 +1,9 @@
 const { createNodeMiddleware, createProbot } = require('probot');
 
 // Initialize the Probot app
-const app = require('../index'); // Assuming you have your Probot logic in a file called app.js
+const app = require('../../../app'); // Assuming you have your Probot logic in a file called app.js
 
+// console.log("hi")
 
 // Export a function for Vercel to handle requests
 module.exports = (req, res) => {
