@@ -1,17 +1,13 @@
 // api/github/webhooks/index.js
-import { createNodeMiddleware, createProbot } from "probot";
-
-import app from "../../../app.js";
 console.log("hi");
 
-export default createNodeMiddleware(app, {
-  probot: createProbot(),
-  webhooksPath: "/api/github/webhooks",
+const { createNodeMiddleware, createProbot } = require("probot");
+
+const app = require("../../../app");
+const probot = createProbot({
+  appId: process.env.APP_ID,
+  privateKey: process.env.PRIVATE_KEY,
+  secret: process.env.WEBHOOK_SECRET
 });
 
-// const { createNodeMiddleware, createProbot } = require("probot");
-
-// const app = require("../../../app");
-// const probot = createProbot();
-
-// module.exports = createNodeMiddleware(app, { probot, webhooksPath: '/api/github/webhooks' });
+module.exports = createNodeMiddleware(app, {probot, webhooksPath: "/api/github/webhooks"});
