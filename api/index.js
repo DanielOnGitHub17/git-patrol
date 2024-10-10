@@ -1,7 +1,7 @@
 const { Probot } = require("probot");
 const fs = require("fs");
 const path = require("path");
-const reprimand = require("./api/reprimand.js");
+const reprimand = require("./reprimand.js");
 
 const [isNegativeSentiment, makeRandomResponse] =
     [reprimand.isNegativeSentiment, reprimand.makeRandomResponse];
