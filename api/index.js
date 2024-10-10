@@ -13,7 +13,7 @@ const events = ["issues.opened", "issues.edited"
   , "discussion_comment.created", "discussion_comment.edited"
 ];
 
-console.log("DFDSFN", __dirname);
+console.log("DFDSFN", process.env.PRIVATE_KEY_PATH);
 module.exports = (app) => {
   // Load the private key from file
   const privateKey = fs.readFileSync(path.join(__dirname, process.env.PRIVATE_KEY_PATH), "utf8");
