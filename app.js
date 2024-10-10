@@ -32,5 +32,16 @@ async function replyToIssue(context) {
 // console.log("there");
 
 module.exports = (app) => {
+  // Set up authentication
+  app.auth = (installationId) => {
+    const { App } = require("@octokit/app");
+    const appAuth = new App({
+      appId: process.env.APP_ID,
+      privateKey: process.env.PRIVATE_KEY
+    });
+    return appAuth.getInstallationOctokit(installationId);
+
+  };
+
   app.on(events, replyToIssue);
 };
