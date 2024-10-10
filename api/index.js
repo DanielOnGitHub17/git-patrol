@@ -1,4 +1,4 @@
-const { Probot } = require("probot");
+const { createNodeMiddleware, Probot } = require("probot");
 const fs = require("fs");
 const path = require("path");
 const reprimand = require("./reprimand.js");
@@ -13,6 +13,7 @@ const events = ["issues.opened", "issues.edited"
   , "discussion_comment.created", "discussion_comment.edited"
 ];
 
+console.log("DFDSFN", __dirname);
 module.exports = (app) => {
   // Load the private key from file
   const privateKey = fs.readFileSync(path.join(__dirname, process.env.PRIVATE_KEY_PATH), "utf8");
