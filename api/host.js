@@ -1,7 +1,8 @@
 const { createNodeMiddleware, createProbot } = require('probot');
 
 // Initialize the Probot app
-const app = require('../../app'); // Assuming you have your Probot logic in a file called app.js
+const app = require('../index'); // Assuming you have your Probot logic in a file called app.js
+
 
 // Export a function for Vercel to handle requests
 module.exports = (req, res) => {
@@ -10,7 +11,7 @@ module.exports = (req, res) => {
     privateKey: process.env.PRIVATE_KEY,
     secret: process.env.WEBHOOK_SECRET,
   });
-
+  
   const middleware = createNodeMiddleware(app, { probot });
   middleware(req, res);
 };
