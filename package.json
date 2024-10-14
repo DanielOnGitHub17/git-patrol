@@ -1,27 +1,27 @@
 {
   "name": "git-patrol",
   "version": "1.0.0",
+  "private": true,
   "description": "Reprimand/punish users who use offensive language in GitHub issues comments",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "probot run ./app.js"
+    "start": "probot run ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DanielOnGitHub17/git-patrol.git"
-  },
-  "author": "",
+  "author": "DanielOnGitHub17",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/DanielOnGitHub17/git-patrol/issues"
-  },
-  "homepage": "https://github.com/DanielOnGitHub17/git-patrol#readme",
+  "repository": "github:probot/example-vercel",
   "dependencies": {
-    "axios": "^1.7.7",
-    "body-parser": "^1.20.3",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.0",
-    "probot": "^13.3.8"
+    "@octokit/rest": "^21.0.2",
+    "probot": "^12.2.7"
+  },
+  "devDependencies": {
+    "nock": "^13.2.9",
+    "smee-client": "^1.2.3",
+    "uvu": "^0.5.6"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   }
 }
