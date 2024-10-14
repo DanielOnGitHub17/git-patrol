@@ -11,7 +11,6 @@ const events = ["issues.opened", "issues.edited"
 ];
 
 async function replyToIssue(context) {
-  console.log("Will soon reply to issue");
   if (context.isBot) return;  // Don't want recursive - effect
   const sentBy = context.payload.sender.login;
 
